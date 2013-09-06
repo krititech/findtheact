@@ -173,7 +173,7 @@ Live bands for hire throughout the UK.</span>  </h3>
 <div id="content2">
     <div id="content2_box">
 	<div id="content2_head">
-	    <p class="text" style="<? echo base_url();?><? echo base_url();?>images/headimg.png) no-repeat; text-align: center; font-size: 17px; padding-top: 5px; padding-left:15px; width:250px; height:45px; float: left; background-size:100% 100%;">
+	    <p class="text" style="background: url(<? echo base_url();?>images/headimg.png) no-repeat; text-align: center; font-size: 17px; padding-top: 5px; padding-left:15px; width:250px; height:45px; float: left; background-size:100% 100%;">
 		What?s Happening Now:</p>
 	    <p class="text" style="float: left; margin-left: 30px; margin-top:20px; font-size: 18px; color:rgb(0, 194, 252);">
 		Airbrush Artist requested for Wedding Reception in Wayne
@@ -181,7 +181,7 @@ Live bands for hire throughout the UK.</span>  </h3>
 	</div>
 	<div id="content2_box4">
 	    <div class="content2_box3">
-		<div class="content2_imgbox" style="<? echo base_url();?>images/img10.jpg) no-repeat;">
+		<div class="content2_imgbox" style="background: url(<? echo base_url();?>images/img10.jpg) no-repeat;">
 		    <div class="rating">
 			<img src="<? echo base_url();?>images/star1.png" style="margin-top:170px;">
 		    </div>
@@ -205,7 +205,7 @@ Live bands for hire throughout the UK.</span>  </h3>
 	    
 	    
 	    <div class="content2_box3">
-		<div class="content2_imgbox" style="<? echo base_url();?>images/img11.jpg) no-repeat;">
+		<div class="content2_imgbox" style="background: url(<? echo base_url();?>images/img11.jpg) no-repeat;">
 		    <div class="rating">
 			<img src="<? echo base_url();?>images/star1.png" style="margin-top:170px;">
 		    </div>
@@ -227,7 +227,7 @@ Live bands for hire throughout the UK.</span>  </h3>
 	    </div>
 	    
 	    <div class="content2_box3">
-		<div class="content2_imgbox" style="<? echo base_url();?>images/img12.jpg) no-repeat;">
+		<div class="content2_imgbox" style="background: url(<? echo base_url();?>images/img12.jpg) no-repeat;">
 		    <div class="rating">
 			<img src="<? echo base_url();?>images/star1.png" style="margin-top:170px;">
 		    </div>
@@ -250,7 +250,7 @@ Live bands for hire throughout the UK.</span>  </h3>
 	    
 	    
 	    <div class="content2_box3">
-		<div class="content2_imgbox" style="<? echo base_url();?>images/img10.jpg) no-repeat;">
+		<div class="content2_imgbox" style="background: url(<? echo base_url();?>images/img10.jpg) no-repeat;">
 		    <div class="rating">
 			<img src="<? echo base_url();?>images/star1.png" style="margin-top:170px;">
 		    </div>

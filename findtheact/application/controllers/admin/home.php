@@ -1,6 +1,6 @@
 <?php
 
-class Home extends Controller { // Our Cart class extends the Controller class
+class Home extends CI_Controller { // Our Cart class extends the Controller class
 
 //FETCH PRODUCTS------------------------------------------------------------------
 
@@ -10,9 +10,10 @@ class Home extends Controller { // Our Cart class extends the Controller class
 		//$this->load->model('cart_model'); // Load our cart model for our entire class
 	}
 	
-	function index()
+	function ss()
 	{
-	 $this->template->load('template', 'blog/show_posts'); 
+	 //$this->template->load('template', 'blog/show_posts');
+	 echo "aaa";
 	  
 	
 	}

@@ -43,12 +43,12 @@
  </style>
  <script type="text/javascript" src="<?php echo base_url();?>js/jquery-1.3.2.min.js"></script>
 <script type="text/javascript">
-function deleterecord(val)
+function deleterecords(val)
 {
 		
 
-					$.post('<?php echo base_url()?>index.php/home/deleteval',
-     						 { 'idd':val },
+					$.post('<?php echo base_url()?>index.php/home/deletevalue',
+     						 { 'iddd':val },
 
     
       						function(result) {
@@ -63,18 +63,17 @@ function deleterecord(val)
 <div style="width:100%;height:auto;float:left; background: #ffffff;">
 		<div style=" width: 100%; height:auto; margin: auto; ">
 			<div class="addform">
-						<h3>Create Skill</h3>
-						 <?php echo form_open('addskill/save')?>
+						<h3>Create Event</h3>
+						 <?php echo form_open('addevent/save')?>
 							<table width="700" height="80" border="0" class="table">
 							<tr>
-						         <td>Skill Name</td>
-							<td><input type="text" name="name" class="form2" required />
+						         <td>Event Name</td>
+							<td><input type="text" name="name" class="form2" />
 							</td>
 							</tr>
-                            
-                            <tr>
-				    <td>&nbsp;</td>
-							<td><input type="submit" name="submit" class="submit" value="Submit"/>
+							<tr>
+                            <td>&nbsp;</td>
+                            <td colspan="2"><input type="submit" name="submit" value="Add" class="submit"  />
                             <input type="reset" name="reset"  value="Cancel"  class="submit"/></td></tr>
 						</table>
 						
@@ -92,7 +91,7 @@ function deleterecord(val)
 
 				    <tr class=" tr_head">
 
-						<td colspan="3" style="padding-left:8px;">Existing Skill </td>
+						<td colspan="3" style="padding-left:8px;">Existing Event </td>
 
 						
 
@@ -103,14 +102,14 @@ function deleterecord(val)
 				<?php 
 				
 				
- foreach($skills as $row):
+ foreach($events as $row):
  
 ?>
 				<tr class="tr" id="<?php echo $row->slno?>">
 
-				<td style="padding-left: 8px;"><?php echo $row->skillname?></td>
-				<td><a onclick="deleterecord(<?php echo $row->slno?>);" style="color:#000000;"><img src="<?php echo base_url()?>images/delet.png"></a></td>
-				<td><a href="<?php echo base_url()?>index.php/home/updateskill/<?php echo $row->slno;?>" style="color:#000000;"><img src="<?php echo base_url()?>images/edit.png"></a></td></td>
+				<td style="padding-left: 8px;"><?php echo $row->eventname?></td>
+				<td><a onclick="deleterecords(<?php echo $row->slno?>);" style="color:#000000;"><img src="<?php echo base_url()?>images/delet.png"></a></td>
+				<td><a href="<?php echo base_url()?>index.php/home/updateevent/<?php echo $row->slno;?>" style="color:#000000;"><img src="<?php echo base_url()?>images/edit.png"></a></td></td>
 
 				</tr>
 

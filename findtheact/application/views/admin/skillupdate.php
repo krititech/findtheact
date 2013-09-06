@@ -6,7 +6,7 @@ text-align:left;
 
 
 </style>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>js/jquery-1.3.2.min.js"></script>
 <div style="width:100%;height:auto;float:left; background: #ffffff;">
 		<div style=" width: 100%; height:auto; margin: auto; ">
 			<div class="addform">
@@ -17,7 +17,8 @@ text-align:left;
 										<?php
 										foreach($query as $q): ?>
 										
-						<td><input type="hidden" value="<?php echo $q['id']?>" name="hiden"/></td>
+						<td><input type="hidden" value="<?php echo $q['slno']?>" name="hiden"/></td>
+						<td>Skill Name</td>
 						<td><input type="text" value="<?php echo $q['skillname']?>" name="name"/></td>
 										<?php endforeach;?>
 						</tr>

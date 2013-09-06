@@ -11,11 +11,13 @@ Class Event extends CI_Model
 {
  function events()
  {
-	$this -> db -> select('slno,eventname');
-	$this -> db -> from('event');
-   $query = $this -> db -> get();
 
-   return $query->result();
+   $query = $this -> db -> get('event');
+
+  
+     return $query->result();
+ 
+   
  }
  
  

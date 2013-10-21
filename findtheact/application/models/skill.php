@@ -9,6 +9,8 @@
 <?php
 Class Skill extends CI_Model
 {
+
+/*****************************  get all skils  ******************************/
  function skills()
  {
 
@@ -20,6 +22,5 @@ Class Skill extends CI_Model
    
  }
  
- 
-}
+/***************************** end ******************************/}
 ?>

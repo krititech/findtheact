@@ -2,7 +2,7 @@
 
 class Addevent extends CI_controller{
 
-
+/***************************** add event ******************************/
 
 function save()
 {
@@ -16,6 +16,9 @@ if($this->input->post('submit')){
 
 $this->Addevents->process();                
  }
+ 
+ 
+ /***************************** end ******************************/
 redirect('home/addevent');
 
 

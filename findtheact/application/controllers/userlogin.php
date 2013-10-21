@@ -4,17 +4,20 @@
  */
   session_start();
 class Userlogin extends CI_controller{
+
+
     
-  
+ /********************* load userlogin and signup page ***********************/ 
 
     public function index(){
-        // Load our view to be displayed
-        // to the user
-       $this->load->view('user/userhomepage');
-       //echo "aaa";
+       
+      $this->load->view('user/userhomepage');
+      
     }
     
-   
+ /*****************************   End   *************************/  
+ 
+ /***********************  Save new user details/sign up form details    ***************************************/  
     
 	function save()
 {
@@ -51,6 +54,9 @@ redirect('userlogin');
 	
 	}
 	
+/**************************************  End *****************************************/
+	
+/**************************************  User login controller ****************************************/		
 	
 	public function userlog(){
 	
@@ -65,7 +71,7 @@ redirect('userlogin');
             // If user did not validate, then show them login page again
             //$this->index();
 			 
-			echo "aaa";
+			echo "Invalid username/password";
         }else{
             // If user did validate, 
             // Send them to members area
@@ -76,8 +82,8 @@ redirect('userlogin');
          
          'username' => $row->username,
 		 'type'=>$row->type,
-		 'email'=>$row->email
-		  
+		 'email'=>$row->email,
+		  'pass'=>$row->pwd
        );
 	   $_SESSION['data']=$sess_array;
 	  
@@ -89,7 +95,11 @@ redirect('userlogin');
         }    
 		    
     }
+/************************************* end *********************************************/
 
+
+
+/**************************************** check login and redirect tpo corresponding user page   **************************************/
 
 function chklogin()
 {
@@ -113,6 +123,13 @@ $this->template->load('usertemplate1', 'eventmanager/eventmanager_homepage',$dat
 
 }
 
+
+
+
+/****************************************************   end   ***********************************************************/
+
+
+
 function addact()
 	{
 	$this->load->model('event','',TRUE);
@@ -124,6 +141,54 @@ function addact()
 	 //$this->template->load('usertemplate', 'actmanager/addact',$data); 
 	
 	}
+
+
+/*****************************  Act manager Agency Change******************************/
+
+
+function agencychange()
+{
+if($_SESSION['data'])
+{
+$data=$_SESSION['data'];
+$x=$data['email'];
+
+}
+	$data['emailvalue']=$x;
+
+$this->load->model('allacts','',TRUE);
+$data['allacts'] = $this->allacts->allactdetails($x);
+
+$this->template->load('usertemplate', 'actmanager/agencychange',$data);
+
+}
+
+
+/**************************************** end   ***************************************/
+
+
+/*****************************  Act manager Vedio add******************************/
+
+
+function addvedio()
+{
+if($_SESSION['data'])
+{
+$data=$_SESSION['data'];
+$x=$data['email'];
+
+}
+$data['emailvalue']=$x;
+$this->template->load('usertemplate', 'actmanager/addvedio',$data);
+
+}
+
+
+
+/**************************************** end   ***************************************/
+
+
+/***************************** edit Act manager profile ******************************/
 
 function editprofile()
 	{
@@ -138,6 +203,11 @@ $data=$_SESSION['data'];
 
 	
 	}
+	
+/**************************************** end *********************************************/	
+
+
+/*****************************  Act manager password change ******************************/	
 	
 function change_password()
 	{
@@ -160,14 +230,105 @@ $data['value']=$this->cpassword->cpassw($email,$pass,$cpass);
 
 	
 	}
+
+
+/***************************** end ******************************/
 	
+	
+	
+/*****************************  Act manager Diary ******************************/
+
+
+function diary()
+{
+if($_SESSION['data'])
+{
+$data=$_SESSION['data'];
+$x=$data['email'];
+
+}
+$data['emailvalue']=$x;
+
+$this->template->load('usertemplate', 'actmanager/diary',$data);
+}
+
+/**************************************** end   ***************************************/
+
+
+	
+/***************************** Add Act manager Details******************************/
 function addactmanager()
 	{
 	
-	$this->template->load('usertemplate1', 'eventmanager/addactmanager'); 
+	if($_SESSION['data'])
+{
+$data=$_SESSION['data'];
+$x=$data['email'];
+
+}
+	$this->load->model('event','',TRUE);
+	$data['events'] = $this->event->events(); 
+	$this->load->model('skill','',TRUE);
+	$data['skills'] = $this->skill->skills();
+	 $this->load->model('eventmanager','',TRUE);
+	$data['locations'] = $this->eventmanager->locations();
+	$data['emailvalue']=$x;
+	$this->template->load('usertemplate1', 'eventmanager/addactmanager',$data); 
 	 
 	
 	}
+	
+/**************************************** end   ***************************************/
+
+
+/***************************** View all Act manager Details assigned to the login eventmanaget******************************/
+	
+	function viewact()
+	{
+	if($_SESSION['data'])
+{
+$data=$_SESSION['data'];
+$x=$data['email'];
+
+}
+	$dataval['emailvalue']=$x;
+	$this->load->model('act','',TRUE);
+$data['allacts'] = $this->act->allact($dataval);
+
+
+	$this->template->load('usertemplate1', 'eventmanager/viewact',$data); 
+	
+	
+	}
+
+
+
+/**************************************** end   ***************************************/
+
+
+
+/****************************************  view all event notyificaton of event manager   ***************************************/
+	
+	
+	function eventnotification()
+	{
+	if($_SESSION['data'])
+{
+$data=$_SESSION['data'];
+$x=$data['email'];
+
+}
+	$data['emailvalue']=$x;
+$this->template->load('usertemplate1', 'eventmanager/eventnotification',$data);
+	
+	
+	
+	}
+	
+/****************************************   end   ****************************************************/	
+
+
+/****************************************  event  manager change password   ***************************************/
 	
 function changepassword()
 	{
@@ -190,6 +351,31 @@ $data['value']=$this->cpassword1->cpassw($email,$pass,$cpass);
 
 	
 	}
+	
+	
+/****************************************   end   ****************************************************/	
+
+
+
+function notification()
+{
+	if($_SESSION['data'])
+	{
+	$data=$_SESSION['data'];
+	$x=$data['type'];
+		if($x==2)
+		{
+		$this->load->model('notedetails');
+
+		$data1['results'] = $this->notedetails->subcategory($data);
+		$this->template->load('usertemplate', 'actmanager/notification',$data1);
+		}
+	}
+}
+
+
+/******************************************************* logout ***************************************/
+
 function logout()
 
 	{
@@ -203,7 +389,7 @@ echo "session exist";
 }
 }
 
-
+/******************************************************* End ***************************************/
 
 	
 	

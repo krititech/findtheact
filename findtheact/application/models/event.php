@@ -9,6 +9,8 @@
 <?php
 Class Event extends CI_Model
 {
+
+/***************************** get all events ******************************/
  function events()
  {
 
@@ -19,7 +21,7 @@ Class Event extends CI_Model
  
    
  }
- 
+/***************************** end ******************************/ 
  
 }
 ?>

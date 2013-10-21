@@ -2,7 +2,7 @@
   
 class Editprofile extends CI_controller{
 
-
+/***************************** edit Act manager profile controller ******************************/
 
 function save()
 {
@@ -20,5 +20,8 @@ redirect('userlogin/editprofile');
 
 }
 
+/***************************** end ******************************/
+
 }
+/*************************************   file path: application/controllers/  ************************************************/	
 ?>

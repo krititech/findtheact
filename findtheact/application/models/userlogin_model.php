@@ -1,11 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/* Author: Jorge Torres
- * Description: Login model class
- */
- session_start();
+
 Class Userlogin_model extends CI_Model{
    
-    
+  /**************************************  User login model ****************************************/  
     public function validate(){
         // grab user input
         $username = $this->input->post('username');
@@ -33,5 +30,8 @@ Class Userlogin_model extends CI_Model{
         // then return false.
         return false;
     }
+	
+	
+	/**************************************  End ****************************************/
 }
 ?>

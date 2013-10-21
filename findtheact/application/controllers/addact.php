@@ -20,7 +20,7 @@ $email=$data['email'];
 
 		$this->load->library('upload', $config);
 		
-		echo $config['upload_path'];
+		//echo $config['upload_path'];
 		if ( ! $this->upload->do_upload())
 		{
 			$error = array('error' => $this->upload->display_errors());

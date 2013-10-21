@@ -63,12 +63,41 @@ function deleterecord(val)
 <div style="width:100%;height:auto;float:left; background: #ffffff;">
 		<div style=" width: 100%; height:auto; margin: auto; ">
 			<div class="addform">
-						<h3>Create Skill</h3>
-						 <?php echo form_open('addskill/save')?>
+						<h3>Create Catagory</h3>
+						 <?php echo form_open_multipart('addskill/save')?>
 							<table width="700" height="80" border="0" class="table">
 							<tr>
-						         <td>Skill Name</td>
+						         <td>Catagory Name</td>
 							<td><input type="text" name="name" class="form2" required />
+							</td>
+							</tr>
+                            <tr>
+						         <td>Catagory Descp</td>
+							<td><textarea name="descp" class="form2" required /></textarea>
+							</td>
+							</tr>
+							<tr><td>Image</td>
+							<td><input type="file" name="userfile"  class="form2"/>  </td></tr>
+                            
+                            <tr>
+							
+						         <td>Type</td>
+							<td>
+                            <select class="textbox" name="type">
+                                <option value="">Select</option>
+                               <?php
+                              foreach($typeval as $q):
+                               
+                               ?>
+                               <option value="<?php echo $q->slno?>"><?php echo $q->name?></option>
+                                <?php endforeach;?>
+                                
+                                    
+                                    
+                                </select>
+                            
+                            
+                            
 							</td>
 							</tr>
                             
@@ -92,7 +121,7 @@ function deleterecord(val)
 
 				    <tr class=" tr_head">
 
-						<td colspan="3" style="padding-left:8px;">Existing Skill </td>
+						<td colspan="3" style="padding-left:8px;">Existing Catagory </td>
 
 						
 

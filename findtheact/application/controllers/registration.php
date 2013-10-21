@@ -2,6 +2,7 @@
 
 class registration extends CI_controller{
 
+/****************************************************** add new user ***********************************/		
 
 
 function save()
@@ -17,7 +18,7 @@ if($this->input->post('submit')){
 $this->Addreg->process();                
  }
 //redirect('home/addskill');
-
+/****************************************************** end ***********************************/		
 
 
 }

@@ -6,9 +6,12 @@
                         <h3 class="text2 margin">Category</h3>
                     </div>
                     <ul class="ul">
-                        <a href= "addskill"> <li class="list"><img src="<?php echo base_url();?>images/skill.png" style="margin-right:5px; float: left;">Create Skill</li></a>
-                        <a href= "addevent"><li class="list"><img src="<?php echo base_url();?>images/add.png" style="margin-right:5px; float: left;">Add Event </li></a>
-                        <a href= "logout"><li class="list"><img src="<?php echo base_url();?>images/logout.png" style="margin-right:5px; float: left;">Logout</li></a>
+						<a href= "addtype"><li class="list"><img src="<?php echo base_url();?>images/add.png" style="margin-right:5px; float: left;">Add Type </li></a>
+                        <a href= "<?php echo base_url();?>index.php/home/addskill"> <li class="list"><img src="<?php echo base_url();?>images/skill.png" style="margin-right:5px; float: left;">Create Catagory</li></a>
+                        <a href= "<?php echo base_url();?>index.php/home/addsubskill"> <li class="list"><img src="<?php echo base_url();?>images/skill.png" style="margin-right:5px; float: left;">Create Sub Catagory</li></a>
+                        <a href= "<?php echo base_url();?>index.php/home/indexsubcat"> <li class="list"><img src="<?php echo base_url();?>images/skill.png" style="margin-right:5px; float: left;">Sub Catagory In Index Page</li></a>
+                        <a href= "<?php echo base_url();?>index.php/home/addevent"><li class="list"><img src="<?php echo base_url();?>images/add.png" style="margin-right:5px; float: left;">Add Event </li></a>
+                        <a href= "<?php echo base_url();?>index.php/home/logout"><li class="list"><img src="<?php echo base_url();?>images/logout.png" style="margin-right:5px; float: left;">Logout</li></a>
                        
                     </ul>
                 </div>

@@ -41,6 +41,52 @@
  </script>
 
 
+		<script type="text/javascript">
+		
+		function getsubcat1(vall)
+{
+
+if(vall!='')
+{
+    var len=vall.length;
+	if (len>2) {
+	    $.post('<?php echo base_url()?>index.php/pages/searchsubcategory',
+		{ 'name1':vall},
+		function(result) {
+		//alert(result);
+		$('#searchsubcat').show();
+		$('#searchsubcat1').html(result);
+		}
+		);	
+	}
+	}
+else
+{
+	$('#searchsubcat').hide();
+}
+
+
+
+
+}
+
+function searchgetval(getvalue)
+{
+
+ $('#searchsubcat').hide();
+    
+    $('#skillval').val(getvalue);
+
+}
+		
+		
+		
+		
+		
+		
+		
+		
+		</script>
 
 </head>
 
@@ -53,18 +99,20 @@
                 <div id="socialbar">
 
 		    <div id="socialbar_leftbox">
-
+<a href="<? echo site_url();?>/pages/profile" style="text-decoration:none;">
 			<div class="socialbarbox1" style="background: #8ad6ff;">		    
 
 			    Join
 
 			</div>
-
+			</a>
+<a href="<? echo site_url();?>/userlogin" style="text-decoration:none;">
 			<div class="socialbarbox1" style="font-size: 16px;">		    
 
 			    Login
 
 			</div>
+			</a>
 
 			<div class="socialbarbox1" style="font-size: 16px; width:100px;">		    
 
@@ -77,17 +125,21 @@
 		    <div id="socialbartextbox">
 
 			<div id="socialbartextbox1">
-
-			    <input type="text" name="" id="textbox1">
-
+			<?php
+			$attributes = array('class' => '', 'id' => '');
+			 echo form_open('pages/topbarsearch/', $attributes); ?>
+			<input list="eventname" name="skillval" id="skillval" class="textbox1"  onKeyUp="return getsubcat1(this.value);" value="" placeholder="Photography, Acrobat, Quartet ..." autocomplete="off" />
+			
+			 <div id="searchsubcat" style="margin-top: 1px; border-radius:2px; background: #fff;width: 298px; height: 150px; float: left; display: none; border: 1px solid #036;">
+			    <table id="searchsubcat1"></table>
+			 </div>
+			
+			 
 			</div>
-
 			<div id="socialbartextbox2">
-
-			    <img src="<?php echo base_url()?>images/search.png" style="margin-left: 3px; margin-top: 3px;">
-
+			   <input type="submit" name="submit" value="" style="width:37px; height:30px;border:none; background:url(<? echo base_url();?>images/search.png); margin-left: 3px; margin-top: 3px;">
 			</div>
-
+			 </form>
 		    </div>
 
                   </div>
@@ -275,9 +327,9 @@
 
 Select type:</br></br></td></tr>
 
-<tr><td><input type="checkbox" name="type" value="1"  />Event Manager
+<tr><td><input type="checkbox" name="type" value="1"  />Act Agency
 
-<input type="checkbox"  name="type" value="2" style="margin-left:10px;"/>Act Manager</td></tr>
+</tr>
 
 
 

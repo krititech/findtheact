@@ -9,6 +9,8 @@
 <?php
 Class Eventmanager extends CI_Model
 {
+
+/***************************** all act agency  Details******************************/
  function login($username, $password)
  {
    $this -> db -> select('id, username, password');
@@ -27,22 +29,40 @@ Class Eventmanager extends CI_Model
    {
      return false;
    }
+  
+ /***************************** end ******************************/
  }
  
- function searchevent($event,$location,$skill){
- 	
- 	$sql = "select * from eventmanager where eventname= ?  and `location` like ? and `skill` like ? ";
- 	$this -> db -> query($sql ,array($event,'%'.$location.'%','%'.$skill.'%'));
- 	
+ /***************************** event search ******************************/
+ 
+ function searchevent($location,$skill,$price){
+       
+ 	$skillid=$this->db->get_where('subskill', array('sub_category_name' => $skill));
+        $data=$skillid->result();
+        $skillidval=$data[0]->id;
+		
+        
+ 	///$sql = "select * from act where eventname= ?  and `location` like ? and `skill` like ? ";
+        $sql = "select * from profile where `address` like '%$location%' and `subcategory` like '%$skillidval%' and `mincost`<='$price' ";
+		
+ 	///$this -> db -> query($sql ,array($event,'%'.$location.'%','%'.$skill.'%'));
+        $que1=$this -> db -> query($sql);
+ 	return $que1->result();
  }
  
+ /***************************** end ******************************/
+ 
+ 
+/***************************** get all the distinct location ******************************/
   function locations()
  {
    
-   $query = $this -> db -> query('select distinct(location) as loc from eventmanager');
+   $query = $this -> db -> query('select distinct(address) as loc from profile');
 
    return $query->result();
  }
+ 
+ /*****************************  end ******************************/
  
 }
 ?>

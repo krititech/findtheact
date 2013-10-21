@@ -3,7 +3,7 @@
 class Update_skill extends CI_model {
 
 
-
+/***************************** update skill ******************************/
 
 	// Function to retrieve an array with all product information
 	function retrieve_data($slno){
@@ -12,7 +12,7 @@ class Update_skill extends CI_model {
 		return $query->result_array();
 		//$this-> load->view(carts/products/$p)
 	}
-	
+/***************************** end ******************************/	
 	
 	}
 	

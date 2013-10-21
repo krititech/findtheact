@@ -16,6 +16,76 @@
         <link rel="stylesheet" type="text/css" href="<? echo base_url();?>css/custom2.css" />
 		<script type="text/javascript" src="<? echo base_url();?>js/modernizr.custom.79639.js"></script> 
 		<!--[if lte IE 8]><style>.support-note .note-ie{display:block;}</style><![endif]-->
+
+<script type="text/javascript">
+function getsubcat(val)
+{
+
+if(val!='')
+{
+    var len=val.length;
+	if (len>3) {
+	    $.post('<?php echo base_url()?>index.php/pages/subcategory1',
+		{ 'name':val},
+		function(result) {
+		//alert(result);
+		$('#subcat').show();
+		$('#subcat1').html(result);
+		}
+		);	
+	}
+	}
+else
+{
+	$('#subcat').hide();
+}
+}
+
+function getsubcat1(vall)
+{
+
+if(vall!='')
+{
+    var len=vall.length;
+	if (len>2) {
+	    $.post('<?php echo base_url()?>index.php/pages/searchsubcategory',
+		{ 'name1':vall},
+		function(result) {
+		//alert(result);
+		$('#searchsubcat').show();
+		$('#searchsubcat1').html(result);
+		}
+		);	
+	}
+	}
+else
+{
+	$('#searchsubcat').hide();
+}
+
+
+
+
+}
+
+ function getval(val1)
+ {
+    $('#subcat').hide();
+    
+    $('#skill').val(val1);
+ }
+
+
+
+function searchgetval(getvalue)
+{
+
+ $('#searchsubcat').hide();
+    
+    $('#skillval').val(getvalue);
+
+}
+</script>
     </head>
     
     <body>
@@ -23,23 +93,36 @@
             <div id="topbar_content">
                 <div id="socialbar">
 		    <div id="socialbar_leftbox">
-			<div class="socialbarbox1" style="background: #8ad6ff;">		    
+			<a href="<? echo site_url();?>/pages/profile"><div class="socialbarbox1" style="background: #8ad6ff;">		    
 			    Join
-			</div>
+			</div></a>
+			<a href="<? echo site_url();?>/userlogin" style="text-decoration:none;">
 			<div class="socialbarbox1" style="font-size: 16px;">		    
 			    Login
 			</div>
+			</a>
 			<div class="socialbarbox1" style="font-size: 16px; width:100px;">		    
 			    How It Works
 			</div>
 		    </div>
 		    <div id="socialbartextbox">
 			<div id="socialbartextbox1">
-			    <input type="text" name="" id="textbox1">
+			
+			<?php
+			$attributes = array('class' => '', 'id' => '');
+			 echo form_open('pages/topbarsearch/', $attributes); ?>
+			<input list="eventname" name="skillval" id="skillval" class="textbox1"  onKeyUp="return getsubcat1(this.value);" value="" placeholder="Photography, Acrobat, Quartet ..." autocomplete="off" />
+			
+			 <div id="searchsubcat" style="margin-top: 1px; border-radius:2px; background: #fff;width: 298px; height: 150px; float: left; display: none; border: 1px solid #036;">
+			    <table id="searchsubcat1"></table>
+			 </div>
+			
+			 
 			</div>
 			<div id="socialbartextbox2">
-			    <img src="<? echo base_url();?>images/search.png" style="margin-left: 3px; margin-top: 3px;">
+			   <input type="submit" name="submit" value="" style="width:37px; height:30px;border:none; background:url(<? echo base_url();?>images/search.png); margin-left: 3px; margin-top: 3px;">
 			</div>
+			 </form>
 		    </div>
                   </div>
                 </div>
@@ -74,18 +157,18 @@ Live bands for hire throughout the UK.</span>  </h3>
                     
 							$attributes = array('class' => '', 'id' => '');
 							echo form_open('pages/search/', $attributes); ?>
-			              <table style="width:440px; height: 280px; font-family: arial; font-size: 16px; color: #005c91;">
-                        <tr>
+			              <table style="width:440px; height: 250px; font-family: arial; font-size: 16px; color: #005c91;">
+                        <!--<tr>
                             <td>Event Type</td>
                             <td colspan="4">
                                 <select class="textbox" name="event">
                                 <option value="">Select</option>
                                 <?php
-											foreach($events as $ro => $row)
+											//foreach($events as $ro => $row)
 											
-											{
-												echo "<option value='".$row->slno."'>". $row->eventname."</option>";
-											}
+											//{
+											//	echo "<option value='".$row->slno."'>". $row->eventname."</option>";
+											//}
 									?>
                                 
                                     
@@ -93,9 +176,27 @@ Live bands for hire throughout the UK.</span>  </h3>
                                 </select>
                                 
                                 </td>
+                        </tr>-->
+			
+			 <tr>
+                            <td>My City:</td>
+                            <td colspan="4">
+				<input list="eventname1" name="location" id="location" class="textbox" value="" placeholder="City" autocomplete="off"/>
+			 <datalist id="eventname1">
+			     <?php
+											foreach($locations as $row)
+											{
+											?>
+			   <option value="<?php echo $row->loc ?>">
+			   <?php
+			   }
+			   ?>
+			 </datalist>
+                            </td>
                         </tr>
+			 
                         <tr>
-                            <td>Event Date</td>
+                            <td>My Event Date :</br> (Optional)</td>
                             <td><select class="textbox" style="width:59px;">
                                     <option value="">Sat</option>
                                     <option value="">Fri</option>
@@ -118,42 +219,26 @@ Live bands for hire throughout the UK.</span>  </h3>
                                 </select></td>
                         </tr>
                         <tr>
-                            <td>Entertainment</td>
+                            <td>I'm looking for:</td>
                             <td colspan="4">
-                                <select class="textbox" name="skill">
-                                    <option value="">Select</option>
-                                    <?php
-											foreach($skills as $row)
-											{
-												echo "<option value='".$row->slno."'>".$row->skillname."</option>";
-											}
-									?>
-                                
-                                </select></td>
+				<input list="eventname" name="skill" id="skill" class="textbox"  onKeyUp="return getsubcat(this.value);" value="" placeholder="Photography, Acrobat, Quartet ..." autocomplete="off" />
+			
+			 <div id="subcat" style="margin-top: 1px; border-radius:2px; background: #fff;width: 298px; height: 150px; float: left; display: none; border: 1px solid #036;">
+			    <table id="subcat1"></table>
+			 </div>
+                                </td>
                         </tr>
-                        <tr>
-                            <td>Event Location</td>
-                            <td colspan="4">
-                                <select class="textbox" name="location">
-                                    <option value="">Select</option>
-                                    <?php
-											foreach($locations as $row)
-											{
-												echo "<option value='".$row->loc."'>". $row->loc."</option>";
-											}
-									?>
-                                </select>
-                            </td>
-                        </tr>
+                       
                         <tr>
                             <td>Max Budget</td>
                             <td colspan="4">
-                                <select class="textbox">
-                                    <option value="">Up to $100</option>
-                                    <option value="">Up to $1000</option>
-                                    <option value="">Up to $1200</option>
-                                    <option value="">Up to $1500</option>
-                                    <option value="">Up to $2000</option>
+                                <select class="textbox" name="price">
+									<option value="10000000">No limit</option>
+                                    <option value="100">Up to $100</option>
+                                    <option value="300">Up to $300</option>
+                                    <option value="500">Up to $500</option>
+                                    <option value="1000">Up to $1000</option>
+                                    <option value="1500">Up to $1500</option>
                                 </select>
                             </td>
                         </tr>
@@ -180,96 +265,85 @@ Live bands for hire throughout the UK.</span>  </h3>
 	    </p>
 	</div>
 	<div id="content2_box4">
+	
+	
+											<?php
+											$q=mysql_query("select * from `type` order by `priority` asc limit 0,4");
+											while($r=mysql_fetch_array($q))
+											{
+											
+											$nameval=$r['name'];
+											if($nameval=="Event Services")
+											{
+											$namee="Services";
+											}
+											else
+											{
+											$namee=$nameval;
+											}
+											?>
+	
+	
 	    <div class="content2_box3">
-		<div class="content2_imgbox" style="background: url(<? echo base_url();?>images/img10.jpg) no-repeat;">
+		<div class="content2_imgbox" style="background: url(<? echo base_url();?>uploads/<?php echo $r['image']?>);  height:220; width:200px;">
 		    <div class="rating">
 			<img src="<? echo base_url();?>images/star1.png" style="margin-top:170px;">
 		    </div>
 		</div>
-		<h2 class="head3" style="font-weight: bold; margin-bottom: 0px; color: #006796; ">Live Music</h2>
+		<h2 class="head3" style="font-weight: bold; margin-bottom: 0px; color: #006796; "><?php echo $r['name']?></h2>
 		<ul style=" font-family: Arial, Helvetica sans-serif; font-size: 15px; font-weight: bold; float: left; color:#006796; line-height: 1.6;">
-		    <li class="list">Cover Bands</li>
-		    <li class="list">Classical Ensembles</li>
-		    <li class="list">DJs</li>
-		    <li class="list">Guitarists</li>
-		    <li class="list">Jazz Bands</li>
-		    <li class="list">Pianists</li>
-		    <li class="list">Singers</li>
-		    <li class="list">Tribute Bands</li>
-		    <li class="list">Wedding Bands</li>
+		
+			<?php
+			$id=$r['slno'];
+			$query =  $this->db->get_where('skill', array('typevalue' => $id));
+			foreach ($query->result() as $skillval)
+				{
+				
+				$idval=$skillval->slno;
+				
+			
+				$query1 =  $this->db->get_where('subskill', array('category_id' => $idval,'indexstatus'=>1));
+					//echo $this->db->last_query();
+					
+			foreach ($query1->result() as $subskill)
+				{
+				
+   
+			?>
+		
+		    <li class="list"><?php echo $subskill->sub_category_name?> </li>
+		   
+			<?php
+			
+}
+}
+?>
 		</ul>
-		<div class="quick" style="width: 200px; height:30px; margin-left:10px; margin-top: 0px; color: #ffffff; font-size: 20px;">Browse Live Music</div>
+		<div class="quick" style="width: 200px; height:30px; margin-left:10px; margin-top: 0px; color: #ffffff; font-size: 20px;">Browse <?php echo $namee?></div>
 		<p class="text" style="margin-left:15px; font-size: 15px; margin-top: 10px; float: left; color: #333333;">Book bands, musicians,singers & ensembles.</p>
 	    </div>
 	    
 	    
+		<?php
+		}
+		?>
 	    
-	    <div class="content2_box3">
-		<div class="content2_imgbox" style="background: url(<? echo base_url();?>images/img11.jpg) no-repeat;">
-		    <div class="rating">
-			<img src="<? echo base_url();?>images/star1.png" style="margin-top:170px;">
-		    </div>
-		</div>
-		<h2 class="head3" style="font-weight: bold; margin-bottom: 0px; color: #006796; ">Live Music</h2>
-		<ul style=" font-family: Arial, Helvetica sans-serif; font-size: 15px; font-weight: bold; float: left; color:#006796; line-height: 1.6;">
-		    <li class="list">Cover Bands</li>
-		    <li class="list">Classical Ensembles</li>
-		    <li class="list">DJs</li>
-		    <li class="list">Guitarists</li>
-		    <li class="list">Jazz Bands</li>
-		    <li class="list">Pianists</li>
-		    <li class="list">Singers</li>
-		    <li class="list">Tribute Bands</li>
-		    <li class="list">Wedding Bands</li>
-		</ul>
-		<div class="quick" style="width: 200px; height:30px; margin-left:10px; margin-top: 0px; color: #ffffff; font-size: 20px;">Browse Live Music</div>
-		<p class="text" style="margin-left:15px; font-size: 15px; margin-top: 10px; float: left; color: #333333;">Book bands, musicians,singers & ensembles.</p>
-	    </div>
-	    
-	    <div class="content2_box3">
-		<div class="content2_imgbox" style="background: url(<? echo base_url();?>images/img12.jpg) no-repeat;">
-		    <div class="rating">
-			<img src="<? echo base_url();?>images/star1.png" style="margin-top:170px;">
-		    </div>
-		</div>
-		<h2 class="head3" style="font-weight: bold; margin-bottom: 0px; color: #006796; ">Live Music</h2>
-		<ul style=" font-family: Arial, Helvetica sans-serif; font-size: 15px; font-weight: bold; float: left; color:#006796; line-height: 1.6;">
-		    <li class="list">Cover Bands</li>
-		    <li class="list">Classical Ensembles</li>
-		    <li class="list">DJs</li>
-		    <li class="list">Guitarists</li>
-		    <li class="list">Jazz Bands</li>
-		    <li class="list">Pianists</li>
-		    <li class="list">Singers</li>
-		    <li class="list">Tribute Bands</li>
-		    <li class="list">Wedding Bands</li>
-		</ul>
-		<div class="quick" style="width: 200px; height:30px; margin-left:10px; margin-top: 0px; color: #ffffff; font-size: 20px;">Browse Live Music</div>
-		<p class="text" style="margin-left:15px; font-size: 15px; margin-top: 10px; float: left; color: #333333;">Book bands, musicians,singers & ensembles.</p>
-	    </div>
-	    
-	    
-	    <div class="content2_box3">
-		<div class="content2_imgbox" style="background: url(<? echo base_url();?>images/img10.jpg) no-repeat;">
-		    <div class="rating">
-			<img src="<? echo base_url();?>images/star1.png" style="margin-top:170px;">
-		    </div>
-		</div>
-		<h2 class="head3" style="font-weight: bold; margin-bottom: 0px; color: #006796; ">Live Music</h2>
-		<ul style=" font-family: Arial, Helvetica sans-serif; font-size: 15px; font-weight: bold; float: left; color:#006796; line-height: 1.6;">
-		    <li class="list">Cover Bands</li>
-		    <li class="list">Classical Ensembles</li>
-		    <li class="list">DJs</li>
-		    <li class="list">Guitarists</li>
-		    <li class="list">Jazz Bands</li>
-		    <li class="list">Pianists</li>
-		    <li class="list">Singers</li>
-		    <li class="list">Tribute Bands</li>
-		    <li class="list">Wedding Bands</li>
-		</ul>
-		<div class="quick" style="width: 200px; height:30px; margin-left:10px; margin-top: 0px; color: #ffffff; font-size: 20px;">Browse Live Music</div>
-		<p class="text" style="margin-left:15px; font-size: 15px; margin-top: 10px; float: left; color: #333333;">Book bands, musicians,singers & ensembles.</p>
-	    </div>
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 	</div>
     </div>
 </div>
